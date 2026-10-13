@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+	color-scheme: light;
+	--ink: #40354c;
+	--muted: #88769c;
+	--accent: #8062a7;
+	--paper: #fffdf8;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	padding: 56px 20px;
+	color: var(--ink);
+	background:
+		radial-gradient(ellipse at 12% 18%, rgba(255, 255, 255, 0.78), transparent 28%),
+		radial-gradient(ellipse at 88% 82%, rgba(255, 255, 255, 0.55), transparent 30%),
+		linear-gradient(135deg, #eee8f7, #e5dcf2 52%, #f4edf8);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+.page {
+	position: relative;
+	z-index: 1;
+	width: min(100%, 790px);
+	margin: 0 auto;
+}
+
+.letter {
+	position: relative;
+	overflow: hidden;
+	padding: clamp(34px, 7vw, 70px) clamp(25px, 8vw, 82px) 34px;
+	background:
+		linear-gradient(rgba(128, 98, 167, 0.035) 1px, transparent 1px) 0 0 / 100% 31px,
+		var(--paper);
+	border: 1px solid rgba(128, 98, 167, 0.22);
+	border-radius: 4px;
+	box-shadow: 0 24px 70px rgba(72, 52, 97, 0.16), 0 3px 10px rgba(72, 52, 97, 0.08);
+	animation: arrive 850ms ease-out both;
+}
+
+.letter::before,
+.letter::after {
+	position: absolute;
+	width: 170px;
+	height: 170px;
+	border: 1px solid rgba(128, 98, 167, 0.14);
+	border-radius: 50%;
+	content: '';
+	pointer-events: none;
+}
+
+.letter::before {
+	top: -124px;
+	right: -76px;
+}
+
+.letter::after {
+	bottom: -130px;
+	left: -86px;
+}
+
+.letter-top,
+.letter-bottom {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.letter-top {
+	gap: 14px;
+	margin-bottom: 24px;
+}
+
+.top-line {
+	width: 54px;
+	height: 1px;
+	background: #c2afd9;
+}
+
+.small-petal {
+	display: inline-block;
+	width: 11px;
+	height: 15px;
+	border-radius: 100% 0 100% 0;
+	background: linear-gradient(145deg, #c5addf, #8062a7);
+	transform: rotate(-35deg);
+}
+
+h1 {
+	margin: 0;
+	color: #493c59;
+	font-family: 'Playfair Display', Georgia, serif;
+	font-size: clamp(2rem, 6vw, 3.25rem);
+	font-weight: 500;
+	line-height: 1.2;
+	text-align: center;
+}
+
+h1 span {
+	color: var(--accent);
+	font-style: italic;
+}
+
+.flourish {
+	margin: 7px 0 30px;
+	color: #9a80b9;
+	font-family: Georgia, serif;
+	font-size: 2rem;
+	line-height: 1;
+	text-align: center;
+}
+
+.letter-copy {
+	font-size: 1rem;
+	line-height: 1.9;
+}
+
+.letter-copy p {
+	margin: 0 0 20px;
+}
+
+.letter-copy .greeting {
+	margin-bottom: 16px;
+	color: #6b5587;
+	font-family: 'Playfair Display', Georgia, serif;
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.signature {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 28px 2px 26px 0;
+}
+
+.signoff {
+	color: var(--muted);
+	font-size: 0.92rem;
+}
+
+.name {
+	margin-top: 1px;
+	color: var(--accent);
+	font-family: 'Playfair Display', Georgia, serif;
+	font-size: 2rem;
+	font-style: italic;
+}
+
+.letter-bottom {
+	gap: 10px;
+	padding-top: 19px;
+	border-top: 1px solid rgba(128, 98, 167, 0.2);
+	color: #89779f;
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.page-note {
+	margin: 20px 0 0;
+	color: #877499;
+	font-size: 0.82rem;
+	letter-spacing: 0.06em;
+	text-align: center;
+}
+
+.petal-layer {
+	position: fixed;
+	z-index: 2;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	user-select: none;
+}
+
+.falling-petal {
+	position: absolute;
+	top: -12vh;
+	left: var(--left);
+	width: var(--size);
+	height: calc(var(--size) * 1.45);
+	border-radius: 100% 0 100% 0;
+	background: linear-gradient(145deg, #d6c2ec 5%, #a98bcf 55%, #795a9f 100%);
+	opacity: 0.62;
+	animation: petal-fall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes petal-fall {
+	0% {
+		transform: translate3d(0, -5vh, 0) rotate(0deg);
+	}
+	25% {
+		transform: translate3d(calc(var(--drift) * 0.35), 28vh, 0) rotate(110deg);
+	}
+	50% {
+		transform: translate3d(calc(var(--drift) * -0.2), 58vh, 0) rotate(230deg);
+	}
+	75% {
+		transform: translate3d(var(--drift), 88vh, 0) rotate(320deg);
+	}
+	100% {
+		transform: translate3d(0, 112vh, 0) rotate(450deg);
+	}
+}
+
+@keyframes arrive {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 540px) {
+	body {
+		padding: 22px 12px;
+	}
+
+	.letter {
+		padding-right: 25px;
+		padding-left: 25px;
+	}
+
+	.letter-copy {
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+
+	.falling-petal:nth-child(even) {
+		opacity: 0.4;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}
